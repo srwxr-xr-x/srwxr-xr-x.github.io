@@ -244,6 +244,7 @@ sub {
 sup {
   top: -0.5em;
 }
+
 a {
   color: var(--bs-link-color);
   text-decoration: none;
@@ -639,33 +640,15 @@ progress {
 .container-lg,
 .container-md,
 .container-sm {
-  --bs-gutter-x: 0rem;
-  --bs-gutter-y: 0rem;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+}
 
-}
-.container-nvbr {
-  --bs-gutter-x: 5rem;
-  width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
-}
-.container-show {
-  --bs-gutter-x: 0rem;
-  --bs-gutter-y: 0rem;
-  width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 10%;
-}
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -3751,8 +3734,8 @@ textarea.form-control-lg {
 }
 
 .navbar {
-  --bs-navbar-padding-x: 1rem;
-  --bs-navbar-padding-y: 1rem;
+  --bs-navbar-padding-x: 1.5rem;
+  --bs-navbar-padding-y: 0.5rem;
   --bs-navbar-color: rgba(0, 0, 0, 0.55);
   --bs-navbar-hover-color: rgba(0, 0, 0, 0.7);
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
@@ -3771,13 +3754,13 @@ textarea.form-control-lg {
   --bs-navbar-toggler-focus-width: 0.25rem;
   --bs-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
   position: fixed;
-  top: 0;
   width: 100%;
-  display: flex;
+  display: inline-block;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  z-index: 3;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -3789,7 +3772,7 @@ textarea.form-control-lg {
   display: flex;
   flex-wrap: inherit;
   align-items: center;
-  
+  justify-content: space-between;
 }
 .navbar-brand {
   padding-top: var(--bs-navbar-brand-padding-y);
@@ -10875,7 +10858,6 @@ header.masthead {
   padding-top: 8rem;
   padding-bottom: 8rem;
   z-index: -9999;
-
 }
 header.masthead:before {
   content: "";
@@ -10892,8 +10874,8 @@ header.masthead h1, header.masthead .h1 {
 }
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 35rem;
-    padding-bottom: 35rem;
+    padding-top: 12rem;
+    padding-bottom: 12rem;
   }
   header.masthead h1, header.masthead .h1 {
     font-size: 3rem;
@@ -10907,11 +10889,6 @@ header.masthead h1, header.masthead .h1 {
   min-height: 30rem;
   background-size: cover;
 }
-.showcase .icon-img {
-  min-height: 10rem;
-  background-size: cover;
-}
-
 @media (min-width: 768px) {
   .showcase .showcase-text {
     padding: 7rem;
@@ -10953,10 +10930,57 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
-video {
+
+header {
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
   min-width: 100%;
   min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Media Query for devices withi coarse pointers and no hover functionality */
+
+/* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('https://cdnb.artstation.com/p/assets/images/images/071/486/865/large/rwxr-xr-x-screenshot-2024-01-15-043232.jpg?1705314868') black no-repeat center center scroll;
+  }
+
+  header video {
+    display: none;
+  }
 }
