@@ -10971,16 +10971,3 @@ header .overlay {
   z-index: 1;
 }
 
-/* Media Query for devices withi coarse pointers and no hover functionality */
-
-/* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
-
-@media (pointer: coarse) and (hover: none) {
-  header {
-    background: url('https://cdnb.artstation.com/p/assets/images/images/071/486/865/large/rwxr-xr-x-screenshot-2024-01-15-043232.jpg?1705314868') black no-repeat center center scroll;
-  }
-
-  header video {
-    display: none;
-  }
-}
